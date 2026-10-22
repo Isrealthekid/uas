@@ -1476,7 +1476,6 @@ button:disabled {
 .project-card:last-child { margin-bottom: 0; }
 .project-image { position: relative; min-height: 34rem; overflow: hidden; background: #eae7e1; }
 .project-image img { object-fit: cover; }
-.project-image-index { position: absolute; top: 1.5rem; left: 1.5rem; padding: 0.625rem 0.875rem; background: #fffffff0; font-size: 0.6875rem; letter-spacing: 0.1em; }
 .project-panel { padding: 2.5rem 8%; background: #f0f1ef; min-width: 0; }
 .project-panel-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-bottom: 1.5rem; border-bottom: 0.0625rem solid #d8dad5; font-size: 0.6875rem; letter-spacing: 0.07em; text-transform: uppercase; }
 .project-status { display: inline-flex; align-items: center; gap: 0.5rem; color: #72756d; text-transform: none; letter-spacing: 0; }
@@ -1508,4 +1507,69 @@ button:disabled {
 @media (max-width: 23rem) {
   .projects-intro h1 { font-size: 2.75rem; }
   .project-facts, .project-focus ul { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+}
+
+.company-page { padding: 11rem var(--page-gutter) 5rem; background: #fff; color: #191a18; }
+.company-intro h1 { margin: 0; font-size: 4.75rem; line-height: 1.02; font-weight: 500; letter-spacing: -0.055em; }
+.company-intro { margin-bottom: 3.5rem; }
+.company-hero-image { position: relative; aspect-ratio: 2.25; overflow: hidden; background: #f0f1ef; }
+.company-hero-image img { object-fit: cover; object-position: center 15%; }
+.company-story { display: grid; grid-template-columns: 24% minmax(0, 1fr); gap: 5%; padding-block: 5rem; }
+.company-section-label { margin: 0.5rem 0 0; color: #73766f; font-size: 1.125rem; font-weight: 500; }
+.company-statement { margin: 0; max-width: 48rem; font-size: 2.5rem; line-height: 1.2; letter-spacing: -0.04em; }
+.company-body { margin: 1.75rem 0 0; max-width: 40rem; font-size: 1.125rem; line-height: 1.6; color: #73766f; }
+.company-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin: 3rem 0 0; padding-top: 1.75rem; border-top: 0.0625rem solid #dcded9; }
+.company-facts > div, .company-facility-facts > div { display: flex; flex-direction: column-reverse; align-items: flex-start; gap: 0.75rem; }
+.company-facts dt { font-size: 0.8125rem; color: #73766f; }
+.company-facts dd { margin: 0; font-size: 3rem; line-height: 1; letter-spacing: -0.045em; }
+.company-approach, .company-facility { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.company-approach-image, .company-facility-image { position: relative; min-height: 32rem; overflow: hidden; background: #f0f1ef; }
+.company-approach-image img, .company-facility-image img { object-fit: cover; }
+.company-approach-copy { padding: 3.5rem 9%; background: #f0f1ef; }
+.company-approach h2, .company-facility h2, .company-section-heading h2, .company-commitment h2 { margin: 0; font-size: 3rem; font-weight: 500; line-height: 1.08; letter-spacing: -0.045em; }
+.company-principles { margin-top: 2.5rem; }
+.company-principles > div { padding-block: 1.25rem; border-top: 0.0625rem solid #d8dad5; }
+.company-principles h3 { margin: 0 0 0.5rem; font-size: 1.125rem; font-weight: 500; }
+.company-principles p { margin: 0; color: #73766f; font-size: 0.9375rem; line-height: 1.5; }
+.company-facility { margin-top: 3rem; background: #eaa221; }
+.company-facility-copy { padding: 3.5rem 9%; }
+.company-facility-copy .projects-eyebrow { color: #493409; }
+.company-facility-copy > p:not(.projects-eyebrow) { max-width: 30rem; margin: 2rem 0; font-size: 1.0625rem; line-height: 1.6; }
+.company-facility-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 3rem 0 0; padding-top: 1.75rem; border-top: 0.0625rem solid #191a1833; }
+.company-facility-facts dt { font-size: 0.75rem; }
+.company-facility-facts dd { margin: 0; font-size: 1.625rem; letter-spacing: -0.035em; }
+.company-team { padding-block: 5rem; scroll-margin-top: 8rem; }
+.company-section-heading { margin-bottom: 2.5rem; }
+.team-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2%; }
+.team-card { min-width: 0; }
+.team-portrait { position: relative; aspect-ratio: 1 / 1; overflow: hidden; background: #eeefec; }
+.team-portrait img { object-fit: cover; }
+.team-portrait-placeholder { height: 100%; display: grid; place-items: end center; background: linear-gradient(160deg, #f4f4f2, #e3e5df); }
+.team-portrait-placeholder svg { width: 55%; height: 75%; stroke: #b8bdb1; stroke-width: 0.75; }
+.team-card-copy { padding: 1.5rem 0; border-bottom: 0.0625rem solid #dcded9; }
+.team-card h3 { margin: 0; font-size: 1.5rem; font-weight: 500; line-height: 1.3; letter-spacing: -0.025em; }
+.team-card-copy p { margin: 0.5rem 0 0; color: #73766f; font-size: 0.9375rem; }
+.company-commitment { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8%; border-top: 0.0625rem solid #dcded9; padding-top: 3rem; }
+.company-commitment > div > p:not(.projects-eyebrow) { margin: 0; max-width: 36rem; color: #73766f; font-size: 1.125rem; line-height: 1.6; }
+@media (width < 56.25rem) {
+  .company-page { padding-top: 8rem; padding-bottom: 3rem; }
+  .company-intro h1 { font-size: 3.25rem; }
+  .company-hero-image { aspect-ratio: 4 / 3; }
+  .company-story, .company-approach, .company-facility, .company-commitment { grid-template-columns: minmax(0, 1fr); }
+  .company-story { gap: 1.5rem; padding-block: 3rem; }
+  .company-statement { font-size: 2rem; }
+  .company-facts { gap: 1rem; margin-top: 2rem; }
+  .company-facts dd { font-size: 2rem; }
+  .company-approach-image, .company-facility-image { min-height: 0; aspect-ratio: 4 / 3; }
+  .company-approach-copy, .company-facility-copy { padding: 2.5rem 7%; }
+  .company-approach h2, .company-facility h2, .company-section-heading h2, .company-commitment h2 { font-size: 2.25rem; }
+  .company-facility { margin-top: 2rem; }
+  .company-facility-facts dd { font-size: 1.25rem; }
+  .company-team { padding-block: 3rem; }
+  .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 4%; }
+  .team-card h3 { font-size: 1.25rem; }
+  .company-commitment { gap: 1.5rem; padding-top: 2rem; }
+}
+@media (max-width: 37.5rem) {
+  .team-grid { grid-template-columns: minmax(0, 1fr); }
 }

@@ -55,7 +55,7 @@ export const primaryNavigation: NavigationSection[] = [
   {
     id: "about",
     label: "About us",
-    href: "/#about-us",
+    href: "/about",
   },
   {
     id: "projects",

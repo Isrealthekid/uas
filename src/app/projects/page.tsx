@@ -56,9 +56,6 @@ export default function ProjectsPage() {
                 sizes="(max-width: 899px) 100vw, 55vw"
                 preload={index === 0}
               />
-              <span className="project-image-index" aria-hidden="true">
-                BR / 0{index + 1}
-              </span>
             </div>
             <div className="project-panel">
               <div className="project-panel-top">
