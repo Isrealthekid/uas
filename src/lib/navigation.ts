@@ -60,7 +60,7 @@ export const primaryNavigation: NavigationSection[] = [
   {
     id: "projects",
     label: "Projects",
-    href: "https://www.briechuas.com/portfolio",
+    href: "/projects",
   },
 ];
 

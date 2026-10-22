@@ -1,3 +1,4 @@
+import { ArrowIcon } from "@/components/arrow-icon";
 import Link from "next/link";
 import { drones } from "@/lib/drones";
 import { DroneIcon } from "@/components/drone-icon";
@@ -26,22 +27,34 @@ export function FleetSection() {
               <header className="drone-display-heading">
                 <span className="drone-model-number">BR / 0{index + 1}</span>
                 <h3 id={`drone-${drone.slug}`}>{drone.name}</h3>
-                <ul className="drone-missions" aria-label={`${drone.name} capabilities`}>
-                  {drone.missions.map((mission) => <li key={mission}>{mission}</li>)}
+                <ul
+                  className="drone-missions"
+                  aria-label={`${drone.name} capabilities`}
+                >
+                  {drone.missions.map((mission) => (
+                    <li key={mission}>{mission}</li>
+                  ))}
                 </ul>
               </header>
               <DroneMedia drone={drone} />
             </div>
             <div className="drone-details-panel">
               <div className="drone-panel-heading">
-                <span>Mission profile</span>
+                <span>Drone profile</span>
                 <DroneIcon variant={drone.icon} />
               </div>
               <p className="drone-panel-category">{drone.category}</p>
               <p className="drone-description">{drone.description}</p>
-              <DroneSpecs specs={drone.specs} label={`${drone.name} quick specifications`} />
-              <Link className="drone-learn-more" href={`/fleet/${drone.slug}`} aria-label={`Learn more about ${drone.name}`}>
-                Learn More <span aria-hidden="true">↗</span>
+              <DroneSpecs
+                specs={drone.specs}
+                label={`${drone.name} quick specifications`}
+              />
+              <Link
+                className="drone-learn-more"
+                href={`/fleet/${drone.slug}`}
+                aria-label={`Learn more about ${drone.name}`}
+              >
+                Learn More <ArrowIcon />
               </Link>
             </div>
           </article>

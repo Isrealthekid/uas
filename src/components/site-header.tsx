@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowIcon } from "@/components/arrow-icon";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -26,17 +27,22 @@ function NavigationHeader({ pathname }: { pathname: string }) {
     if (href.startsWith("mailto:")) return false;
     const destination = new URL(href, "https://www.briechuas.com");
     if (destination.hash) {
-      if (destination.hash === "#fleet" && pathname.startsWith("/fleet/")) return true;
+      if (destination.hash === "#fleet" && pathname.startsWith("/fleet/"))
+        return true;
       return pathname === destination.pathname && hash === destination.hash;
     }
-    return pathname === destination.pathname || pathname.startsWith(`${destination.pathname}/`);
+    return (
+      pathname === destination.pathname ||
+      pathname.startsWith(`${destination.pathname}/`)
+    );
   };
   const fleetActive = isCurrent("/#fleet");
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [mobileSection, setMobileSection] = useState<string | null>(null);
-  const menuButton = useRef<HTMLButtonElement>(null);
+  const menuButton = useRef<HTMLElement>(null);
+  const mobileMenu = useRef<HTMLDetailsElement>(null);
   const header = useRef<HTMLElement>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -66,6 +72,7 @@ function NavigationHeader({ pathname }: { pathname: string }) {
     cancelClose();
     setActiveSection(null);
     setMobileSection(null);
+    if (mobileMenu.current) mobileMenu.current.open = false;
     setMenuOpen(false);
   }, [cancelClose]);
 
@@ -80,7 +87,11 @@ function NavigationHeader({ pathname }: { pathname: string }) {
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("pageshow", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("pageshow", onScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -93,8 +104,8 @@ function NavigationHeader({ pathname }: { pathname: string }) {
         } else if (mobileSection) {
           setMobileSection(null);
           document.getElementById(`mobile-trigger-${mobileSection}`)?.focus();
-        } else if (menuOpen) {
-          setMenuOpen(false);
+        } else if (mobileMenu.current?.open) {
+          closeNavigation();
           menuButton.current?.focus();
         }
       }
@@ -121,7 +132,11 @@ function NavigationHeader({ pathname }: { pathname: string }) {
       ref={header}
       onClickCapture={(event) => {
         const link = (event.target as Element).closest("a");
-        if (link && link.origin === window.location.origin && link.pathname === pathname) {
+        if (
+          link &&
+          link.origin === window.location.origin &&
+          link.pathname === pathname
+        ) {
           setHash(link.hash);
         }
       }}
@@ -152,20 +167,12 @@ function NavigationHeader({ pathname }: { pathname: string }) {
           onClick={closeNavigation}
         >
           <Image
-            className="brand-logo brand-logo-light"
-            src="/assets/briech-logo-light.png"
+            className="brand-logo"
+            src={solid || scrolled || menuOpen ? "/assets/briech-logo-dark.png" : "/assets/briech-logo-light.png"}
             alt=""
             width={497}
             height={131}
             preload
-            unoptimized
-          />
-          <Image
-            className="brand-logo brand-logo-dark"
-            src="/assets/briech-logo-dark.png"
-            alt=""
-            width={497}
-            height={131}
             unoptimized
           />
         </Link>
@@ -176,7 +183,11 @@ function NavigationHeader({ pathname }: { pathname: string }) {
                 <button
                   id={`nav-trigger-${section.id}`}
                   className={`nav-link nav-disclosure${section.id === "fleet" && fleetActive ? " is-active" : ""}`}
-                  aria-current={section.id === "fleet" && fleetActive ? "location" : undefined}
+                  aria-current={
+                    section.id === "fleet" && fleetActive
+                      ? "location"
+                      : undefined
+                  }
                   type="button"
                   aria-expanded={activeSection === section.id}
                   aria-controls={`nav-panel-${section.id}`}
@@ -212,7 +223,9 @@ function NavigationHeader({ pathname }: { pathname: string }) {
               ) : (
                 <Link
                   className={`nav-link${isCurrent(section.href) ? " is-active" : ""}`}
-                  aria-current={isCurrent(section.href) ? "location" : undefined}
+                  aria-current={
+                    isCurrent(section.href) ? "location" : undefined
+                  }
                   href={section.href}
                   onPointerEnter={() => setActiveSection(null)}
                   onFocus={() => setActiveSection(null)}
@@ -227,9 +240,7 @@ function NavigationHeader({ pathname }: { pathname: string }) {
           {secondaryNavigation.map((link) => (
             <li key={link.label}>
               <Link
-                className={
-                  `${link.label === "Contact us" ? "contact-link" : "nav-link"}${isCurrent(link.href) ? " is-active" : ""}`
-                }
+                className={`${link.label === "Contact us" ? "contact-link" : "nav-link"}${isCurrent(link.href) ? " is-active" : ""}`}
                 aria-current={isCurrent(link.href) ? "page" : undefined}
                 href={link.href}
                 onPointerEnter={() => setActiveSection(null)}
@@ -240,27 +251,122 @@ function NavigationHeader({ pathname }: { pathname: string }) {
             </li>
           ))}
         </ul>
-        <button
-          ref={menuButton}
-          className="menu-toggle"
-          type="button"
-          aria-expanded={menuOpen}
-          aria-controls="mobile-navigation"
-          aria-label={
-            menuOpen ? "Close navigation menu" : "Open navigation menu"
-          }
-          onClick={() => {
-            setActiveSection(null);
-            setMobileSection(null);
-            setMenuOpen((open) => !open);
-          }}
+        <details
+          ref={mobileMenu}
+          className="mobile-menu"
+          onToggle={(event) => setMenuOpen(event.currentTarget.open)}
         >
-          <span>{menuOpen ? "Close" : "Menu"}</span>
-          <span className="menu-icon" aria-hidden="true">
-            <span />
-            <span />
-          </span>
-        </button>
+          <summary
+            ref={menuButton}
+            className="menu-toggle"
+            aria-controls="mobile-navigation"
+            aria-label={
+              menuOpen ? "Close navigation menu" : "Open navigation menu"
+            }
+          >
+            <span className="menu-label-open">Menu</span>
+            <span className="menu-label-close">Close</span>
+            <span className="menu-icon" aria-hidden="true">
+              <span />
+              <span />
+            </span>
+          </summary>
+          <nav
+            className="mobile-navigation"
+            id="mobile-navigation"
+            aria-label="Mobile navigation"
+          >
+            {primaryNavigation.map((section) =>
+              section.items ? (
+                <div className="mobile-nav-group" key={section.id}>
+                  <button
+                    id={`mobile-trigger-${section.id}`}
+                    className={`mobile-nav-trigger${section.id === "fleet" && fleetActive ? " is-active" : ""}`}
+                    aria-current={
+                      section.id === "fleet" && fleetActive
+                        ? "location"
+                        : undefined
+                    }
+                    type="button"
+                    aria-expanded={mobileSection === section.id}
+                    aria-controls={`mobile-subnav-${section.id}`}
+                    onClick={() =>
+                      setMobileSection((active) =>
+                        active === section.id ? null : section.id,
+                      )
+                    }
+                  >
+                    {section.label}
+                    <svg
+                      className="mobile-disclosure-icon"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="m3 6 5 5 5-5"
+                        stroke="currentColor"
+                        strokeWidth="1.2"
+                      />
+                    </svg>
+                  </button>
+                  <div
+                    className="mobile-subnav"
+                    id={`mobile-subnav-${section.id}`}
+                    hidden={mobileSection !== section.id}
+                  >
+                    {section.items.map((item) => (
+                      <Link
+                        href={item.href}
+                        key={item.title}
+                        onClick={closeNavigation}
+                      >
+                        <span className="mobile-subnav-copy">
+                          <strong>{item.title}</strong>
+                          <span>{item.description}</span>
+                        </span>
+                        <PanelArrow />
+                      </Link>
+                    ))}
+                    <Link
+                      className="mobile-subnav-overview"
+                      href={section.href}
+                      onClick={closeNavigation}
+                    >
+                      {section.overviewLabel}
+                      <PanelArrow />
+                    </Link>
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  key={section.id}
+                  className={`mobile-nav-link${isCurrent(section.href) ? " is-active" : ""}`}
+                  aria-current={
+                    isCurrent(section.href) ? "location" : undefined
+                  }
+                  href={section.href}
+                  onClick={closeNavigation}
+                >
+                  {section.label}
+                  <ArrowIcon />
+                </Link>
+              ),
+            )}
+            {secondaryNavigation.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                className={`mobile-nav-link${link.label === "Contact us" ? " mobile-nav-contact" : ""}${isCurrent(link.href) ? " is-active" : ""}`}
+                aria-current={isCurrent(link.href) ? "page" : undefined}
+                onClick={closeNavigation}
+              >
+                {link.label}
+                <ArrowIcon />
+              </Link>
+            ))}
+          </nav>
+        </details>
       </nav>
       {primaryNavigation
         .filter((section) => section.items)
@@ -299,96 +405,6 @@ function NavigationHeader({ pathname }: { pathname: string }) {
             </div>
           </section>
         ))}
-      <nav
-        className="mobile-navigation"
-        id="mobile-navigation"
-        aria-label="Mobile navigation"
-        hidden={!menuOpen}
-      >
-        {primaryNavigation.map((section) =>
-          section.items ? (
-            <div className="mobile-nav-group" key={section.id}>
-              <button
-                id={`mobile-trigger-${section.id}`}
-                className={`mobile-nav-trigger${section.id === "fleet" && fleetActive ? " is-active" : ""}`}
-                aria-current={section.id === "fleet" && fleetActive ? "location" : undefined}
-                type="button"
-                aria-expanded={mobileSection === section.id}
-                aria-controls={`mobile-subnav-${section.id}`}
-                onClick={() =>
-                  setMobileSection((active) =>
-                    active === section.id ? null : section.id,
-                  )
-                }
-              >
-                {section.label}
-                <svg
-                  className="mobile-disclosure-icon"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="m3 6 5 5 5-5"
-                    stroke="currentColor"
-                    strokeWidth="1.2"
-                  />
-                </svg>
-              </button>
-              <div
-                className="mobile-subnav"
-                id={`mobile-subnav-${section.id}`}
-                hidden={mobileSection !== section.id}
-              >
-                {section.items.map((item) => (
-                  <Link
-                    href={item.href}
-                    key={item.title}
-                    onClick={closeNavigation}
-                  >
-                    <span className="mobile-subnav-copy">
-                      <strong>{item.title}</strong>
-                      <span>{item.description}</span>
-                    </span>
-                    <PanelArrow />
-                  </Link>
-                ))}
-                <Link
-                  className="mobile-subnav-overview"
-                  href={section.href}
-                  onClick={closeNavigation}
-                >
-                  {section.overviewLabel}
-                  <PanelArrow />
-                </Link>
-              </div>
-            </div>
-          ) : (
-            <Link
-              key={section.id}
-              className={`mobile-nav-link${isCurrent(section.href) ? " is-active" : ""}`}
-              aria-current={isCurrent(section.href) ? "location" : undefined}
-              href={section.href}
-              onClick={closeNavigation}
-            >
-              {section.label}
-              <span aria-hidden="true">↗</span>
-            </Link>
-          ),
-        )}
-        {secondaryNavigation.map((link) => (
-          <Link
-            key={link.label}
-            href={link.href}
-            className={`mobile-nav-link${link.label === "Contact us" ? " mobile-nav-contact" : ""}${isCurrent(link.href) ? " is-active" : ""}`}
-            aria-current={isCurrent(link.href) ? "page" : undefined}
-            onClick={closeNavigation}
-          >
-            {link.label}
-            <span aria-hidden="true">↗</span>
-          </Link>
-        ))}
-      </nav>
     </header>
   );
 }

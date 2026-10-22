@@ -1,3 +1,4 @@
+import { ArrowIcon } from "@/components/arrow-icon";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import Link from "next/link";
@@ -25,7 +26,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default function DronePage({ params }: Props) {
   return (
     <main className="drone-page">
-      <Suspense fallback={<p role="status" className="drone-page-heading">Loading aircraft details…</p>}>
+      <Suspense
+        fallback={
+          <p role="status" className="drone-page-heading">
+            Loading aircraft details…
+          </p>
+        }
+      >
         <DroneDetails params={params} />
       </Suspense>
     </main>
@@ -52,7 +59,7 @@ async function DroneDetails({ params }: Props) {
             href={`mailto:info@briechuas.com?subject=${encodeURIComponent(`${drone.name} enquiry`)}`}
           >
             Enquire about {drone.name}
-            <span aria-hidden="true">↗</span>
+            <ArrowIcon />
           </a>
         </div>
         <DroneMedia drone={drone} />
@@ -69,7 +76,7 @@ async function DroneDetails({ params }: Props) {
       </section>
       <div className="drone-page-footer">
         <Link href="/#fleet">
-          Explore the full fleet <span aria-hidden="true">→</span>
+          Explore the full fleet <ArrowIcon direction="right" />
         </Link>
       </div>
     </>
