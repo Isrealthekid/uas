@@ -10,6 +10,8 @@ export type Drone = {
   image: string;
   poster: string;
   video?: string;
+  gallery: string[];
+  model?: string;
   specs: DroneSpec[];
   additionalSpecs: DroneSpec[];
   source: string;
@@ -20,6 +22,8 @@ export type Drone = {
 export const drones: Drone[] = [
   {
     slug: "argini",
+    gallery: [1, 2, 3].map((frame) => `/assets/drones/gallery/argini${frame}.jpg`),
+    model: "/assets/drones/models/argini.glb",
     missions: ["Reconnaissance", "Surveillance", "VTOL"],
     name: "Argini",
     category: "Hybrid VTOL reconnaissance drone",
@@ -50,6 +54,8 @@ export const drones: Drone[] = [
   },
   {
     slug: "arsenio",
+    gallery: [1, 2, 3].map((frame) => `/assets/drones/gallery/arsenio${frame}.jpg`),
+    model: "/assets/drones/models/arsenio.glb",
     missions: ["Intelligence", "Surveillance", "Long endurance"],
     name: "Arsenio",
     category: "Long-endurance surveillance drone",
@@ -80,6 +86,8 @@ export const drones: Drone[] = [
   },
   {
     slug: "xander",
+    gallery: [1, 2, 3].map((frame) => `/assets/drones/gallery/xander${frame}.jpg`),
+    model: "/assets/drones/models/xander.glb",
     missions: ["Reconnaissance", "Surveillance", "Modular payload"],
     name: "Xander",
     category: "Extended reconnaissance platform",
@@ -110,6 +118,8 @@ export const drones: Drone[] = [
   },
   {
     slug: "bfly",
+    gallery: [1, 2, 3].map((frame) => `/assets/drones/gallery/bfly${frame}.jpg`),
+    model: "/assets/drones/models/bfly.glb",
     missions: ["Tactical", "Reconnaissance", "Rapid deployment"],
     name: "Bfly",
     category: "Compact reconnaissance drone",
@@ -140,6 +150,8 @@ export const drones: Drone[] = [
   },
   {
     slug: "damisa",
+    model: "/assets/drones/models/damisa.glb",
+    gallery: [1, 2, 3].map((frame) => `/assets/drones/gallery/damisa${frame}.jpg`),
     missions: ["Tactical", "Combat", "Long endurance"],
     name: "Damisa",
     category: "Combat unmanned aerial system",

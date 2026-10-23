@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { drones, getDrone } from "@/lib/drones";
 import { DroneIcon } from "@/components/drone-icon";
 import { DroneMedia } from "@/components/drone-media";
+import { DroneViewer } from "@/components/drone-viewer";
 import { DroneSpecs } from "@/components/drone-specs";
 
 type Props = { params: Promise<{ drone: string }> };
@@ -42,6 +43,7 @@ export default function DronePage({ params }: Props) {
 async function DroneDetails({ params }: Props) {
   const drone = getDrone((await params).drone);
   if (!drone) notFound();
+  const nextDrone = drones[(drones.findIndex((item) => item.slug === drone.slug) + 1) % drones.length];
   return (
     <>
       <div className="drone-page-heading">
@@ -74,9 +76,10 @@ async function DroneDetails({ params }: Props) {
           label={`${drone.name} specifications`}
         />
       </section>
+      <DroneViewer drone={drone} />
       <div className="drone-page-footer">
-        <Link href="/#fleet">
-          Explore the full fleet <ArrowIcon direction="right" />
+        <Link href={`/fleet/${nextDrone.slug}`} aria-label={`View next drone: ${nextDrone.name}`}>
+          View next drone <ArrowIcon direction="right" />
         </Link>
       </div>
     </>

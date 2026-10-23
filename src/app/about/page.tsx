@@ -124,16 +124,16 @@ export default function AboutPage() {
           </p>
           <dl className="company-facility-facts">
             <div>
-              <dt>Campus</dt>
-              <dd>10 hectares</dd>
+              <dt>Models</dt>
+              <dd>5+</dd>
             </div>
             <div>
-              <dt>Factories</dt>
-              <dd>3</dd>
+              <dt>Local</dt>
+              <dd>100%</dd>
             </div>
             <div>
-              <dt>Hangar</dt>
-              <dd>300 m²</dd>
+              <dt>Support</dt>
+              <dd>24/7</dd>
             </div>
           </dl>
         </div>

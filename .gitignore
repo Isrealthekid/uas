@@ -20,8 +20,8 @@
 # production
 /build
 
-# Original design/model source files; web assets are in public/assets.
-/assets/
+# Original model sources are local; optimized GLBs are versioned.
+/public/assets/video/
 
 # misc
 .DS_Store
