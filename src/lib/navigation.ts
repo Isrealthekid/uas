@@ -12,7 +12,7 @@ export type NavigationSection = {
   items?: NavigationCard[];
 };
 
-// Current website destinations; replace as the new internal pages are built.
+// Shared destinations for desktop, mobile and footer navigation.
 export const primaryNavigation: NavigationSection[] = [
   {
     id: "fleet",
@@ -50,7 +50,7 @@ export const primaryNavigation: NavigationSection[] = [
   {
     id: "news",
     label: "News",
-    href: "https://www.briechuas.com/press",
+    href: "/news",
   },
   {
     id: "about",
@@ -69,5 +69,5 @@ export const secondaryNavigation = [
     label: "Careers",
     href: "mailto:info@briechuas.com?subject=Careers%20at%20Briech%20UAS",
   },
-  { label: "Contact us", href: "https://www.briechuas.com/contact" },
+  { label: "Contact us", href: "/contact" },
 ];

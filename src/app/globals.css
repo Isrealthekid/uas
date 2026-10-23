@@ -1611,6 +1611,9 @@ button:disabled {
 .drone-viewer-heading h2 { margin-top: 0.75rem; font-size: 2rem; font-weight: 500; letter-spacing: -0.04em; }
 .drone-viewer-heading p { color: #666; font-size: 0.875rem; }
 .drone-viewer-stage { position: relative; height: 36rem; background: #f0f0ee; overflow: hidden; }
+.drone-viewer-stage.is-open { height: 90vh; height: 90dvh; }
+.viewer-close { position: absolute; top: 1rem; right: 1rem; z-index: 3; display: inline-flex; align-items: center; gap: 0.5rem; min-height: 2.75rem; padding: 0.75rem 1rem; border: 0; background: #fff; color: #171717; cursor: pointer; box-shadow: 0 0.25rem 1rem #00000012; transition: background-color 0.5s ease-in; }
+.viewer-close:hover, .viewer-close:focus-visible { background-color: #ece9e4; }
 .drone-scene-canvas { position: absolute; inset: 0; }
 .drone-scene-canvas canvas { display: block; width: 100%; height: 100%; touch-action: none; }
 .viewer-message { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1.5rem; text-align: center; padding: 2rem; }
@@ -1629,4 +1632,35 @@ button:disabled {
 .drone-gallery { touch-action: pan-y pinch-zoom; }
 @media (max-width: 56.25rem), (hover: none) and (pointer: coarse) {
   .drone-gallery-controls { display: none; }
+}
+
+/* Company information pages share the site's neutral panels and restrained type. */
+.information-page { padding: 10rem var(--page-gutter) 5rem; background: #fff; color: #191a18; }
+.information-intro { max-width: 65rem; margin-bottom: 4rem; }
+.information-intro h1, .not-found-page h1 { margin: 1.5rem 0; font-size: clamp(2.5rem, 5vw, 5rem); line-height: 1.03; font-weight: 500; letter-spacing: -0.055em; }
+.information-intro > p:last-child, .not-found-page > p:last-of-type { max-width: 42rem; color: #666; font-size: 1.125rem; line-height: 1.6; }
+.contact-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.information-card { background: #f1f1ef; padding: 2.5rem; min-width: 0; }
+.information-card h2, .news-empty h2 { margin: 0 0 1.5rem; font-size: 1.75rem; font-weight: 500; letter-spacing: -0.035em; }
+.information-card p, .news-empty p, .information-note p { color: #666; line-height: 1.65; }
+.information-card address { font-style: normal; line-height: 1.6; }
+.contact-detail { display: inline-flex; align-items: center; gap: 1rem; margin-top: 1.5rem; overflow-wrap: anywhere; }
+.contact-detail:hover, .information-text-link:hover { text-decoration: underline; text-underline-offset: 0.3rem; }
+.information-note { display: flex; align-items: center; justify-content: space-between; gap: 3rem; padding-top: 3rem; }
+.information-note p { max-width: 40rem; }
+.information-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 2rem; margin-top: 2.5rem; }
+.information-text-link { display: inline-flex; align-items: center; gap: 0.75rem; }
+.news-empty { display: grid; grid-template-columns: 20% minmax(0, 1fr); padding: 4rem; background: #f1f1ef; gap: 3rem; }
+.news-empty p { max-width: 40rem; }
+.news-mark { font-size: 6rem; font-weight: 300; line-height: 1; color: #eaa221; }
+.not-found-page { min-height: 75vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+.about-stat dd { font-size: 2.5rem; overflow-wrap: anywhere; }
+@media (max-width: 56.25rem) {
+  .information-page { padding-top: 8rem; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .information-card { padding: 2rem; }
+  .information-note { align-items: flex-start; flex-direction: column; gap: 1.5rem; }
+  .news-empty { grid-template-columns: 1fr; padding: 2rem; gap: 1.5rem; }
+  .news-mark { font-size: 3rem; }
+  .about-stat dd { font-size: 1.5rem; }
 }

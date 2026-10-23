@@ -28,6 +28,8 @@ export default function DroneScene({ src, name }: { src: string; name: string })
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.setClearColor(0xf0f0ee);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.domElement.setAttribute("aria-label", `Interactive 3D model of ${name}`);
     renderer.domElement.setAttribute("role", "img");
     container.appendChild(renderer.domElement);
@@ -39,10 +41,14 @@ export default function DroneScene({ src, name }: { src: string; name: string })
     controls.minDistance = 1.8;
     controls.maxDistance = 18;
     controls.enableDamping = false;
-    scene.add(new THREE.HemisphereLight(0xffffff, 0x777777, 1.8));
-    const light = new THREE.DirectionalLight(0xffffff, 2);
-    light.position.set(3, 5, 4);
-    scene.add(light);
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x777777, 1));
+    const light = new THREE.SpotLight(0xfff5e6, 150, 0, Math.PI / 5, 0.8, 2);
+    light.position.set(2.5, 6, 3);
+    light.castShadow = true;
+    light.shadow.mapSize.set(1024, 1024);
+    light.shadow.bias = -0.0002;
+    light.shadow.normalBias = 0.025;
+    scene.add(light, light.target);
     const fill = new THREE.DirectionalLight(0xffffff, 0.8);
     fill.position.set(-4, 2, -3);
     scene.add(fill);
@@ -94,7 +100,18 @@ export default function DroneScene({ src, name }: { src: string; name: string })
         model.scale.setScalar(scale);
         const center = box.getCenter(new THREE.Vector3());
         model.position.copy(center.multiplyScalar(-scale));
+        model.traverse((child) => {
+          if (child instanceof THREE.Mesh) { child.castShadow = true; child.receiveShadow = true; }
+        });
         scene.add(model);
+        const floor = new THREE.Mesh(
+          new THREE.PlaneGeometry(40, 40),
+          new THREE.MeshStandardMaterial({ color: 0xe4e4e1, roughness: 1 }),
+        );
+        floor.rotation.x = -Math.PI / 2;
+        floor.position.y = -size.y * scale / 2 - 0.2;
+        floor.receiveShadow = true;
+        scene.add(floor);
         camera.position.set(3.8, 2.2, 4.2).setLength(Math.max(6, 7.15 / camera.aspect));
         controls.update();
         controls.saveState();
@@ -128,6 +145,7 @@ export default function DroneScene({ src, name }: { src: string; name: string })
       resize.disconnect();
       controls.dispose();
       release(scene);
+      light.shadow.dispose();
       renderer.dispose();
       renderer.forceContextLoss();
       renderer.domElement.remove();

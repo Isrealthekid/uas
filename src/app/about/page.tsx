@@ -7,7 +7,7 @@ import { approach, teamMembers } from "@/lib/about";
 export const metadata: Metadata = {
   title: "About Us | Briech UAS",
   description:
-    "Meet Briech UAS, a Nigerian unmanned aircraft manufacturer established in 2021 and developing its manufacturing campus in Kuje, Abuja.",
+    "Meet Briech UAS, a Nigerian unmanned aircraft manufacturer registered in 2021 and developing its manufacturing campus in Kuje, Abuja.",
 };
 
 export default function AboutPage() {
@@ -52,7 +52,7 @@ export default function AboutPage() {
         </h2>
         <div>
           <p className="company-statement">
-            Founded in 2021, Briech UAS is a Nigerian manufacturer developing
+            Registered in 2021, Briech UAS is a Nigerian manufacturer developing
             unmanned aircraft for Africa and beyond.
           </p>
           <p className="company-body">
@@ -62,7 +62,7 @@ export default function AboutPage() {
           </p>
           <dl className="company-facts">
             <div>
-              <dt>Established</dt>
+              <dt>Registered</dt>
               <dd>2021</dd>
             </div>
             <div>
@@ -124,16 +124,16 @@ export default function AboutPage() {
           </p>
           <dl className="company-facility-facts">
             <div>
-              <dt>Models</dt>
-              <dd>5+</dd>
+              <dt>Aircraft models</dt>
+              <dd>5</dd>
             </div>
             <div>
-              <dt>Local</dt>
-              <dd>100%</dd>
+              <dt>Our base</dt>
+              <dd>Nigeria</dd>
             </div>
             <div>
-              <dt>Support</dt>
-              <dd>24/7</dd>
+              <dt>For our customers</dt>
+              <dd>Support</dd>
             </div>
           </dl>
         </div>

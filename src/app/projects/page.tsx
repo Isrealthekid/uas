@@ -60,7 +60,6 @@ export default function ProjectsPage() {
             <div className="project-panel">
               <div className="project-panel-top">
                 <span>{project.sector}</span>
-                <span className="project-status">Completed</span>
               </div>
               <h2 id={`${project.slug}-title`}>{project.name}</h2>
               <p className="project-description">{project.description}</p>

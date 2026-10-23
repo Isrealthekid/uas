@@ -5,9 +5,9 @@ import { SiteFooter } from "@/components/site-footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Briech UAS | The next generation of flight",
+  title: "Briech UAS | Drone Manufacturer in Nigeria",
   description:
-    "Building Africa’s next generation of unmanned aerial systems. Discover Briech UAS, a Nigerian manufacturer of unmanned aircraft.",
+    "Explore Briech UAS, a Nigerian drone manufacturer based in Abuja. Discover our aircraft, projects and approach to unmanned aerial systems.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

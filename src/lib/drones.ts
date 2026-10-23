@@ -61,7 +61,7 @@ export const drones: Drone[] = [
     category: "Long-endurance surveillance drone",
     icon: "vtol",
     description:
-      "A hybrid VTOL aircraft designed for sustained intelligence and surveillance. Arsenio pairs an eight-hour flight endurance with adaptable payloads for varied reconnaissance needs.",
+      "A VTOL aircraft designed for sustained intelligence and surveillance. Arsenio pairs an eight-hour flight endurance with adaptable payloads for varied reconnaissance needs.",
     overview:
       "Arsenio combines vertical-flight capability with an advanced sensor package. Its configurable payload supports extended observation across different operating environments.",
     image: "/assets/drones/arsenio.jpg",

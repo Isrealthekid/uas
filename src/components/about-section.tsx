@@ -3,15 +3,15 @@
 import { useEffect, useRef, type CSSProperties } from "react";
 
 const paragraphs = [
-  "Briech UAS is a leading manufacturer of unmanned aerial vehicles registered in Nigeria in 2021. We are committed to becoming a world-leading robotic aerial surveillance company, building Africa's biggest drone manufacturing facility in Kuje, Abuja.",
-  "Our customer-centric approach focuses on solving individual customer needs and adjusting our UAS designs to critical mission particularities.",
+  "Briech UAS is a Nigerian manufacturer of unmanned aircraft, registered in 2021. We are developing a drone manufacturing facility in Kuje, Abuja, to bring research, production and aircraft support together.",
+  "We work with customers to understand their needs and adapt our aircraft to their operational requirements.",
 ];
 
 const characterCount = paragraphs.join("").length;
 const stats = [
-  { value: "5+", label: "Models" },
-  { value: "100%", label: "Local" },
-  { value: "24/7", label: "Support" },
+  { value: "5", label: "Aircraft models" },
+  { value: "Nigeria", label: "Our base" },
+  { value: "Support", label: "For our customers" },
 ];
 
 export function AboutSection() {
