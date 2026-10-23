@@ -61,6 +61,7 @@ export async function SiteFooter() {
                 {[
                   ...primaryNavigation.filter((item) => item.id !== "fleet"),
                   ...secondaryNavigation,
+                  { label: "Privacy policy", href: "/privacy-policy" },
                 ].map((item) => (
                   <li key={item.label}>
                     <Link href={item.href}>{item.label}</Link>

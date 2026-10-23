@@ -1664,3 +1664,10 @@ button:disabled {
   .news-mark { font-size: 3rem; }
   .about-stat dd { font-size: 1.5rem; }
 }
+
+.privacy-content { max-width: 54rem; }
+.privacy-content section { padding: 2rem 0; border-top: 0.0625rem solid #dededb; }
+.privacy-content h2 { margin: 0 0 1rem; font-size: 1.5rem; font-weight: 500; letter-spacing: -0.025em; }
+.privacy-content p { margin: 0 0 1rem; color: #50514f; font-size: 1rem; line-height: 1.75; overflow-wrap: anywhere; }
+.privacy-content a { text-decoration: underline; text-underline-offset: 0.2em; }
+.privacy-content a:hover { color: #191a18; }
