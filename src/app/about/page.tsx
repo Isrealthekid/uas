@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowIcon } from "@/components/arrow-icon";
-import { approach, teamMembers } from "@/lib/about";
+import { approach } from "@/lib/about";
+// Restore this import with the team section when headshots are ready.
+// import { teamMembers } from "@/lib/about";
 
 export const metadata: Metadata = {
   title: "About Us | Briech UAS",
@@ -26,9 +28,11 @@ export default function AboutPage() {
               People, engineering and ambition. Shaping the next generation of
               unmanned flight.
             </p>
+            {/* Restore with the individual team section when headshots are ready.
             <a className="drone-learn-more" href="#our-team">
               Meet our team <ArrowIcon direction="right" />
             </a>
+            */}
           </div>
         </div>
       </header>
@@ -147,6 +151,7 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Temporarily hidden until individual team headshots and final details are ready.
       <section
         id="our-team"
         className="company-team"
@@ -186,6 +191,7 @@ export default function AboutPage() {
           ))}
         </div>
       </section>
+      */}
 
       <section
         className="company-commitment"
